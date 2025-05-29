@@ -1,0 +1,24 @@
+# Bytecode
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual Envs
+.env/
+venv/
+ENV/
+
+# IDEs / Editors
+.vscode/
+.idea/
+
+# Logs & Outputs
+log.txt
+seat_state.json
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Pytest cache
+.pytest_cache/
