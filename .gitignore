@@ -1,24 +1,28 @@
-# Bytecode
+# 🐍 Python Bytecode
 __pycache__/
 *.py[cod]
 *.so
 
-# Virtual Envs
+# 🚫 Ignore individual pycache files if tracked before
+!*/.gitkeep
+
+# 🧪 Test Cache
+.pytest_cache/
+
+# 🌍 OS files
+.DS_Store
+Thumbs.db
+
+# 📦 Virtual Environments
 .env/
 venv/
 ENV/
 
-# IDEs / Editors
+# 🧠 IDE / Editor configs
 .vscode/
 .idea/
 
-# Logs & Outputs
+# 🗂 Runtime Generated Files
 log.txt
 seat_state.json
-
-# OS
-.DS_Store
-Thumbs.db
-
-# Pytest cache
-.pytest_cache/
+instance/
