@@ -25,31 +25,42 @@
 ---
 
 ## 📁 ساختار پروژه
-
-seat_reservation/
-├── app/
-│ ├── init.py
-│ ├── routes.py
-│ ├── scheduler/
-│ │ ├── init.py
-│ │ ├── logger.py
-│ │ ├── reservation_thread.py
-│ │ ├── scheduler.py
-│ │ └── seat_manager.py
-│ ├── static/
-│ └── templates/
-│ └── index.html
-├── tests/
-│ ├── init.py
-│ ├── test_logger.py
-│ ├── test_reservation_thread.py
-│ └── test_seat_manager.py
-├── seat_state.json
+```
+.
+├── app
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-313.pyc
+│   │   └── routes.cpython-313.pyc
+│   ├── routes.py
+│   ├── scheduler
+│   │   ├── __init__.py
+│   │   ├── logger.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-313.pyc
+│   │   │   ├── logger.cpython-313.pyc
+│   │   │   ├── reservation_thread.cpython-313.pyc
+│   │   │   ├── scheduler.cpython-313.pyc
+│   │   │   └── seat_manager.cpython-313.pyc
+│   │   ├── reservation_thread.py
+│   │   ├── scheduler.py
+│   │   └── seat_manager.py
+│   ├── static
+│   └── templates
+│       └── index.html
 ├── log.txt
-├── run.py
+├── README.md
 ├── requirements.txt
-└── README.md
-
+├── run.py
+├── seat_state.json
+└── tests
+    ├── __init__.py
+    ├── __pycache__
+    │   ├── __init__.cpython-313.pyc
+    │   ├── test_logger.cpython-313-pytest-8.3.5.pyc
+    │   └── test_seat_manager.cpython-313-pytest-8.3.5.pyc
+    └── test_seat_manager.py
+```
 
 
 
@@ -62,33 +73,33 @@ seat_reservation/
 ```bash
 git clone https://github.com/YOUR_USERNAME/seat-reservation-system.git
 cd seat-reservation-system
-
+```
 ۲. نصب وابستگی‌ها
-
+```
 python -m venv venv
 source venv/bin/activate  # در ویندوز: venv\Scripts\activate
 pip install -r requirements.txt
-
+```
 ۳. اجرای برنامه (رابط گرافیکی)
-
+```
 python run.py
-
+```
 آدرس: http://localhost:5000
 اجرای حالت CLI (بدون UI)
-
+```
 python run.py cli
-
+```
 در این حالت دو فایل خروجی تولید می‌شود:
-
+```
     log.txt
 
     seat_state.json
-
+```
 🧪 اجرای تست‌ها
-
+```
 pip install pytest
 pytest
-
+```
 ✅ تست‌های پروژه، بخش‌های اصلی مثل مدیریت صندلی و سیستم لاگ را پوشش می‌دهند.
 📊 پیش‌نمایش داشبورد
 
