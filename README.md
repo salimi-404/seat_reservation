@@ -1,146 +1,137 @@
-# 🎥 Multi-Client Video Streaming System
 
-A real-time video broadcasting system built with **Flask**, **Flask-SocketIO**, and **Python threading**, enabling simultaneous streaming of video frames to multiple clients. The system ensures synchronized frame delivery using concurrent threads and real-time communication protocols.
+# 🎟️ سامانه شبیه‌سازی رزرو صندلی با Flask
 
----
-
-## 🚀 Project Overview
-
-This project simulates a server that reads a video file, extracts its frames, and transmits them in real time to all connected clients. Clients receive and display the video in their browsers through a WebSocket-based connection, allowing synchronized playback.
-
-The system is designed to:
-
-- Serve multiple clients concurrently
-- Deliver synchronized video frames
-- Handle real-time communication using SocketIO
-- Log connection events and stream performance
-- Optionally display visual statistics using a dashboard
+یک پروژه‌ی شبیه‌سازی رزرو صندلی با استفاده از **Flask** و **چندریسمانی (Multi-threading)** به زبان پایتون.  
+در این سامانه، کاربران (ریسمان‌ها) با اولویت‌های مختلف تلاش می‌کنند تا تعدادی صندلی رزرو کنند.  
+سامانه از منطق اولویت‌محور، احتمال لغو تصادفی، تلاش مجدد برای درخواست‌های ناموفق و یک داشبورد گرافیکی حرفه‌ای برای نمایش وضعیت رزروها پشتیبانی می‌کند.
 
 ---
 
-## 🛠️ Technologies Used
+## ✨ امکانات و ویژگی‌ها
 
-| Technology         | Purpose                                  |
-|--------------------|------------------------------------------|
-| Flask              | Web framework for HTTP routing           |
-| Flask-SocketIO     | WebSocket communication with clients     |
-| Threading (Python) | Concurrent frame broadcasting            |
-| OpenCV (cv2)       | Video frame extraction and manipulation  |
-| HTML / JavaScript  | Client-side video rendering              |
-| Plotly / Dash      | Real-time dashboard for system metrics   |
-| Logging            | Structured logs for debugging and stats  |
-
----
-
-## 📁 Project Structure
-
-video_streaming/
-├── app.py # Main Flask app with SocketIO
-├── video_sender.py # Threaded frame reader and broadcaster
-├── static/
-│ └── js/client.js # Client-side SocketIO code
-├── templates/
-│ └── index.html # HTML interface for users
-├── video/
-│ └── sample.mp4 # Input video for streaming
-├── dashboard.py # Optional dashboard with real-time graphs
-├── log/
-│ └── log.txt # Log file for server events
-├── requirements.txt # List of dependencies
-└── README.md # Project documentation
-
+- ✅ پشتیبانی از چندریسمانی (Multi-threading) برای شبیه‌سازی هم‌زمان درخواست‌ها
+- 🔢 تعیین تعداد صندلی و محدودیت تعداد درخواست همزمان
+- 🎯 استفاده از اولویت و زمان ورود برای تصمیم‌گیری در رزرو
+- 🔁 تلاش مجدد (Retry) برای درخواست‌های ناموفق
+- 📉 داشبورد وب تعاملی شامل:
+  - نمودار میله‌ای و دایره‌ای برای وضعیت رزروها
+  - نمایش تعداد درخواست‌ها بر حسب تعداد صندلی
+  - نقشه گرافیکی صندلی‌ها
+  - جدول لاگ با جزئیات کامل
+- 🧠 الگوریتم هیبریدی مدیریت درخواست‌ها
+- 🧪 تست‌های خودکار با استفاده از `pytest`
+- 🛠 ساختار ماژولار و قابل گسترش مبتنی بر معماری Flask
 
 ---
 
-## 🔧 Setup Instructions
+## 📁 ساختار پروژه
 
-### 1. Clone the repository
+seat_reservation/
+├── app/
+│ ├── routes.py
+│ ├── init.py
+│ ├── scheduler/
+│ │ ├── seat_manager.py
+│ │ ├── reservation_thread.py
+│ │ ├── scheduler.py
+│ │ └── logger.py
+│ ├── templates/
+│ │ └── index.html
+│ └── static/
+├── tests/
+│ ├── test_seat_manager.py
+│ └── test_logger.py
+├── run.py
+├── requirements.txt
+├── log.txt
+├── seat_state.json
+└── README.md
+
+
+---
+
+## 🚀 نصب و اجرای پروژه
+
+### ۱. کلون کردن پروژه
 
 ```bash
-git clone https://github.com/yourusername/video_streaming.git
-cd video_streaming
+git clone https://github.com/YOUR_USERNAME/seat-reservation-system.git
+cd seat-reservation-system
 
-2. Install dependencies
+۲. نصب وابستگی‌ها
 
+python -m venv venv
+source venv/bin/activate  # در ویندوز: venv\Scripts\activate
 pip install -r requirements.txt
 
-3. Place your video
+۳. اجرای برنامه (رابط گرافیکی)
 
-Replace video/sample.mp4 with any video you want to broadcast.
-4. Run the application
+python run.py
 
-python app.py
+آدرس: http://localhost:5000
+اجرای حالت CLI (بدون UI)
 
-5. Open in browser
+python run.py cli
 
-Navigate to:
+در این حالت دو فایل خروجی تولید می‌شود:
 
-http://localhost:5000
+    log.txt
 
-You can test with multiple tabs or devices to simulate multi-client playback.
-📈 Real-Time Dashboard (Optional)
+    seat_state.json
 
-To run the dashboard for monitoring stream performance:
+🧪 اجرای تست‌ها
 
-python dashboard.py
+pip install pytest
+pytest
 
-This provides:
+✅ تست‌های پروژه، بخش‌های اصلی مثل مدیریت صندلی و سیستم لاگ را پوشش می‌دهند.
+📊 پیش‌نمایش داشبورد
 
-    Client connection history
+پس از اجرا، UI شامل موارد زیر خواهد بود:
 
-    Frame delivery rate
+    فرم آغاز شبیه‌سازی
 
-    Visual alerts on missed/skipped frames
+    ۳ نمودار (Bar, Pie, Request Distribution)
 
-📝 Sample Logs
+    نمایش گرافیکی نقشه صندلی‌ها
 
-[INFO] 2025-05-29 12:00:34 — Frame 156 broadcasted to 3 clients
-[INFO] 2025-05-29 12:00:38 — New client connected: 192.168.1.7
-[WARNING] 2025-05-29 12:01:12 — Frame skipped due to encoding delay
+    جدول کامل لاگ
 
-📚 Educational Value
+🧠 تکنولوژی‌های استفاده‌شده در پروژه
+تکنولوژی / ابزار	توضیح
+Python 3.13	زبان اصلی برنامه‌نویسی
+Flask	فریم‌ورک وب برای ایجاد UI و API
+threading	برای شبیه‌سازی هم‌زمان کاربران
+queue.PriorityQueue	زمان‌بندی با اولویت‌بندی
+Chart.js (CDN)	رسم نمودارهای داینامیک در UI
+HTML + CSS	طراحی رابط گرافیکی
+Jinja2	قالب‌دهی HTML در Flask
+Pytest	تست‌های خودکار
+🔮 بهبودهای پیشنهادی (TODO)
 
-This project is a practical example of:
+استفاده از دیتابیس برای ذخیره‌سازی دائمی اطلاعات
 
-    Real-time server-client communication using WebSockets
+آپدیت زنده داشبورد با WebSocket
 
-    Multithreading and synchronization in Python
+RESTful API برای رزرو خودکار از بیرون
 
-    Efficient media streaming with OpenCV
+احراز هویت و چندکاربره‌سازی
 
-    Backend-to-frontend integration for low-latency delivery
+اجرای پروژه با Docker
 
-    Logging and performance monitoring in live systems
+بهینه‌سازی برای موبایل
 
-🛡️ .gitignore Recommendation
+    ارسال ایمیل یا نوتیفیکیشن پس از رزرو موفق
 
-__pycache__/
-*.pyc
-log/
-*.log
-video/sample.mp4
-.env
+👨‍💻 توسعه‌دهنده
 
-🔮 Potential Improvements
+این پروژه توسط سلیم توسعه داده شده است.
 
-    Support for live webcam streaming
+    گیت‌هاب: github.com/YOUR_USERNAME
 
-    Adaptive bitrate handling
+    ایمیل: your.email@example.com
 
-    Client buffering and reconnection logic
+📝 مجوز (License)
 
-    Pause/play sync across clients
-
-    WebRTC integration for P2P delivery
-
-    Deployment with Docker for scalability
-
-👤 Author
-
-Developed by Mohammad Hasan Salimi
-📧 mamad.h.salimi@gmail.com
-🔗 GitHub Profile
-📄 License
-
-This project is licensed under the MIT License.
-
+این پروژه تحت مجوز MIT منتشر شده است.
+آزادید از آن استفاده، کپی، تغییر و منتشر کنید — تنها کافی‌ست کپی مجوز در پروژه باقی بماند.
