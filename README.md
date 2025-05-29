@@ -25,27 +25,40 @@
 ---
 
 ## 📁 ساختار پروژه
-
-seat_reservation/
-├── app/
-│ ├── routes.py
-│ ├── init.py
-│ ├── scheduler/
-│ │ ├── seat_manager.py
-│ │ ├── reservation_thread.py
-│ │ ├── scheduler.py
-│ │ └── logger.py
-│ ├── templates/
-│ │ └── index.html
-│ └── static/
-├── tests/
-│ ├── test_seat_manager.py
-│ └── test_logger.py
-├── run.py
-├── requirements.txt
+.
+├── app
+│   ├── __init__.py
+│   ├── __pycache__
+│   │   ├── __init__.cpython-313.pyc
+│   │   └── routes.cpython-313.pyc
+│   ├── routes.py
+│   ├── scheduler
+│   │   ├── __init__.py
+│   │   ├── logger.py
+│   │   ├── __pycache__
+│   │   │   ├── __init__.cpython-313.pyc
+│   │   │   ├── logger.cpython-313.pyc
+│   │   │   ├── reservation_thread.cpython-313.pyc
+│   │   │   ├── scheduler.cpython-313.pyc
+│   │   │   └── seat_manager.cpython-313.pyc
+│   │   ├── reservation_thread.py
+│   │   ├── scheduler.py
+│   │   └── seat_manager.py
+│   ├── static
+│   └── templates
+│       └── index.html
 ├── log.txt
+├── README.md
+├── requirements.txt
+├── run.py
 ├── seat_state.json
-└── README.md
+└── tests
+    ├── __init__.py
+    ├── __pycache__
+    │   ├── __init__.cpython-313.pyc
+    │   ├── test_logger.cpython-313-pytest-8.3.5.pyc
+    │   └── test_seat_manager.cpython-313-pytest-8.3.5.pyc
+    └── test_seat_manager.py
 
 
 ---
