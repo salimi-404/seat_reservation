@@ -145,7 +145,7 @@ RESTful API برای رزرو خودکار از بیرون
 
 این پروژه توسط سلیم توسعه داده شده است.
     گیت‌هاب: github.com/salimi-404
-    ایمیل: your.mamad.h.salimi@gmail.com
+    ایمیل: mamad.h.salimi@gmail.com
 
 📝 مجوز (License)
 
