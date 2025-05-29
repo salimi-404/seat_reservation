@@ -1,155 +1,146 @@
-🎟️ سامانه رزرو صندلی با استفاده از Flask
+# 🎥 Multi-Client Video Streaming System
 
-این پروژه یک سامانه شبیه‌سازی برای رزرو صندلی است که با زبان Python و فریم‌ورک Flask توسعه داده شده. در این سیستم، چندین کاربر به‌صورت هم‌زمان (با کمک چندریسمانی یا Multi-threading) تلاش می‌کنند تا صندلی‌های محدودی را رزرو کنند. هر کاربر می‌تواند دارای اولویت متفاوتی باشد، و سامانه از مکانیزم‌های هوشمند برای مدیریت درخواست‌ها، ثبت لاگ‌ها و نمایش وضعیت بهره می‌برد.
-
----
-
-📌 مناسب برای:
-
-* یادگیری مفاهیم برنامه‌نویسی همزمان در پایتون
-* ساخت رابط کاربری وب با Flask و Chart.js
-* آشنایی با طراحی سیستم‌های ماژولار و تست‌پذیر
+A real-time video broadcasting system built with **Flask**, **Flask-SocketIO**, and **Python threading**, enabling simultaneous streaming of video frames to multiple clients. The system ensures synchronized frame delivery using concurrent threads and real-time communication protocols.
 
 ---
 
-✨ ویژگی‌های کلیدی:
+## 🚀 Project Overview
 
-* پشتیبانی کامل از multi-threading برای شبیه‌سازی درخواست کاربران
-* اعمال محدودیت در تعداد درخواست‌های همزمان
-* استفاده از اولویت کاربران و زمان ارسال درخواست برای تصمیم‌گیری
-* قابلیت تلاش مجدد در صورت عدم موفقیت در رزرو
-* داشبورد تحت وب با قابلیت‌های زیر:
+This project simulates a server that reads a video file, extracts its frames, and transmits them in real time to all connected clients. Clients receive and display the video in their browsers through a WebSocket-based connection, allowing synchronized playback.
 
-  * نمودارهای گرافیکی (میله‌ای، دایره‌ای و توزیع درخواست‌ها)
-  * نمایش گرافیکی وضعیت صندلی‌ها (۱۰×۱۰)
-  * جدول کامل از لاگ‌ها و تاریخچه رویدادها
-* الگوریتم اختصاصی زمان‌بندی هیبریدی (HybridScheduler)
-* تست‌های واحد با استفاده از Pytest
-* ساختار ماژولار با قابلیت توسعه آسان
+The system is designed to:
+
+- Serve multiple clients concurrently
+- Deliver synchronized video frames
+- Handle real-time communication using SocketIO
+- Log connection events and stream performance
+- Optionally display visual statistics using a dashboard
 
 ---
 
-📁 ساختار پروژه:
+## 🛠️ Technologies Used
 
-seat\_reservation/
-├── app/
-│   ├── **init**.py              ← راه‌اندازی اپلیکیشن Flask
-│   ├── routes.py                ← تعریف روت‌ها و صفحات
-│   ├── scheduler/
-│   │   ├── logger.py            ← ثبت لاگ‌ها با زمان‌بندی
-│   │   ├── seat\_manager.py      ← منطق مدیریت صندلی‌ها
-│   │   ├── scheduler.py         ← زمان‌بندی ترکیبی با اولویت و Retry
-│   │   └── reservation\_thread.py ← شبیه‌سازی رفتار کاربران
-│   ├── templates/
-│   │   └── index.html           ← قالب HTML داشبورد
-│   └── static/                  ← فایل‌های CSS و JS
-├── tests/
-│   ├── test\_seat\_manager.py     ← تست منطق رزرو
-│   └── test\_logger.py           ← تست لاگ‌گیری
-├── run.py                       ← نقطه شروع برنامه
-├── requirements.txt             ← لیست وابستگی‌ها
-├── README.md                    ← همین فایل توضیحات
-├── seat\_state.json              ← خروجی CLI از وضعیت نهایی صندلی‌ها
-└── log.txt                      ← فایل رویدادهای ثبت‌شده
+| Technology         | Purpose                                  |
+|--------------------|------------------------------------------|
+| Flask              | Web framework for HTTP routing           |
+| Flask-SocketIO     | WebSocket communication with clients     |
+| Threading (Python) | Concurrent frame broadcasting            |
+| OpenCV (cv2)       | Video frame extraction and manipulation  |
+| HTML / JavaScript  | Client-side video rendering              |
+| Plotly / Dash      | Real-time dashboard for system metrics   |
+| Logging            | Structured logs for debugging and stats  |
 
 ---
 
-🚀 نحوه اجرا:
+## 📁 Project Structure
 
-✅ پیش‌نیاز: Python 3.10 به بالا (تست‌شده روی Python 3.13)
+video_streaming/
+├── app.py # Main Flask app with SocketIO
+├── video_sender.py # Threaded frame reader and broadcaster
+├── static/
+│ └── js/client.js # Client-side SocketIO code
+├── templates/
+│ └── index.html # HTML interface for users
+├── video/
+│ └── sample.mp4 # Input video for streaming
+├── dashboard.py # Optional dashboard with real-time graphs
+├── log/
+│ └── log.txt # Log file for server events
+├── requirements.txt # List of dependencies
+└── README.md # Project documentation
 
-۱. کلون کردن پروژه:
-git clone [https://github.com/salimi-404/seat-reservation-system.git](https://github.com/salimi-404/seat-reservation-system.git)
-cd seat-reservation-system
 
-۲. ایجاد محیط مجازی و نصب وابستگی‌ها:
-python -m venv venv
-source venv/bin/activate        # ویندوز: venv\Scripts\activate
+---
+
+## 🔧 Setup Instructions
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/yourusername/video_streaming.git
+cd video_streaming
+
+2. Install dependencies
+
 pip install -r requirements.txt
 
-۳. اجرای نسخه تحت وب:
-python run.py
-و سپس باز کردن در مرورگر:
-[http://localhost:5000](http://localhost:5000)
+3. Place your video
 
-۴. اجرای نسخه CLI (بدون رابط کاربری گرافیکی):
-python run.py cli
+Replace video/sample.mp4 with any video you want to broadcast.
+4. Run the application
 
-خروجی CLI شامل:
+python app.py
 
-* فایل log.txt شامل تمام رویدادها
-* فایل seat\_state.json برای وضعیت نهایی صندلی‌ها
+5. Open in browser
 
----
+Navigate to:
 
-🧪 اجرای تست‌ها:
+http://localhost:5000
 
-نصب pytest (در صورت نیاز):
-pip install pytest
+You can test with multiple tabs or devices to simulate multi-client playback.
+📈 Real-Time Dashboard (Optional)
 
-اجرای تست‌ها:
-pytest
+To run the dashboard for monitoring stream performance:
 
-نتیجه‌ی موفق‌آمیز:
-\===================== test session starts =====================
-collected 5 items
+python dashboard.py
 
-tests/test\_seat\_manager.py ....                       \[80%]
-tests/test\_logger.py .                                \[100%]
+This provides:
 
-\====================== 5 passed in 0.10s ======================
+    Client connection history
 
----
+    Frame delivery rate
 
-📊 داشبورد گرافیکی:
+    Visual alerts on missed/skipped frames
 
-داشبورد برنامه شامل بخش‌های زیر است:
+📝 Sample Logs
 
-* فرم شروع شبیه‌سازی (با تعیین تعداد کاربران)
-* نمودارها:
+[INFO] 2025-05-29 12:00:34 — Frame 156 broadcasted to 3 clients
+[INFO] 2025-05-29 12:00:38 — New client connected: 192.168.1.7
+[WARNING] 2025-05-29 12:01:12 — Frame skipped due to encoding delay
 
-  * Bar Chart برای وضعیت رزروها
-  * Pie Chart برای درصد موفق، ناموفق و لغوشده
-  * نمودار توزیعی درخواست‌ها بر اساس شماره صندلی
-* نقشه گرافیکی صندلی‌ها (سفید = آزاد، قرمز = رزروشده)
-* جدول لاگ تمام رویدادها
+📚 Educational Value
 
-🖼 پیش‌نمایش رابط کاربری:
-(در صورت نیاز، تصویر واقعی جایگزین شود)
+This project is a practical example of:
 
----
+    Real-time server-client communication using WebSockets
 
-🧠 تکنولوژی‌های به‌کاررفته:
+    Multithreading and synchronization in Python
 
-| ابزار / فناوری      | کاربرد                  |
-| ------------------- | ----------------------- |
-| Python 3.13         | زبان برنامه‌نویسی اصلی  |
-| Flask               | فریم‌ورک وب و مدیریت UI |
-| threading           | پیاده‌سازی هم‌زمانی     |
-| queue.PriorityQueue | زمان‌بندی با اولویت     |
-| Chart.js            | رسم نمودارهای داینامیک  |
-| Jinja2              | قالب‌دهی HTML در Flask  |
-| Pytest              | اجرای تست‌های واحد      |
+    Efficient media streaming with OpenCV
 
----
+    Backend-to-frontend integration for low-latency delivery
 
-📌 پیشنهادهای توسعه در آینده:
+    Logging and performance monitoring in live systems
 
-*
+🛡️ .gitignore Recommendation
 
----
+__pycache__/
+*.pyc
+log/
+*.log
+video/sample.mp4
+.env
 
-👨‍💻 توسعه‌دهنده:
+🔮 Potential Improvements
 
+    Support for live webcam streaming
 
-📧 ایمیل: [mamad.h.salimi@gmail.com](mailto:mamad.h.salimi@gmail.com)
-🌐 گیت‌هاب: [https://github.com/salimi-404](https://github.com/salimi-404)
+    Adaptive bitrate handling
 
-در صورت علاقه به مشارکت، خوشحال می‌شم کنار هم پروژه رو بهتر کنیم :)
+    Client buffering and reconnection logic
 
----
+    Pause/play sync across clients
 
-📝 مجوز:
+    WebRTC integration for P2P delivery
 
-این پروژه تحت مجوز MIT منتشر شده.
-استفاده، ویرایش و انتشار آزاد است، به شرطی که فایل LICENSE باقی بماند.
+    Deployment with Docker for scalability
+
+👤 Author
+
+Developed by Mohammad Hasan Salimi
+📧 mamad.h.salimi@gmail.com
+🔗 GitHub Profile
+📄 License
+
+This project is licensed under the MIT License.
+
