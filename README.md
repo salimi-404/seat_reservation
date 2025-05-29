@@ -35,33 +35,6 @@
 
     طراحی ماژولار و قابل گسترش
 
-📁 ساختار پوشه‌ها
-
-seat_reservation/
-├── app/
-│   ├── __init__.py             # راه‌اندازی اولیه اپلیکیشن Flask
-│   ├── routes.py               # تعریف مسیرهای HTTP
-│   └── scheduler/
-│       ├── logger.py           # ثبت لاگ‌ها
-│       ├── seat_manager.py     # مدیریت وضعیت صندلی‌ها
-│       ├── scheduler.py        # الگوریتم زمان‌بندی هیبریدی
-│       └── reservation_thread.py  # شبیه‌سازی رفتار کاربران
-│
-├── templates/                  # قالب‌های HTML
-│   └── index.html
-│
-├── static/                     # فایل‌های CSS و JS
-│
-├── tests/                      # تست‌های واحد
-│   ├── test_seat_manager.py
-│   └── test_logger.py
-│
-├── run.py                      # نقطه‌ی شروع برنامه
-├── requirements.txt            # وابستگی‌ها
-├── seat_state.json             # وضعیت نهایی صندلی‌ها (در حالت CLI)
-├── log.txt                     # گزارش رویدادها
-└── README.md                   # همین فایل
-
 🚀 راه‌اندازی و اجرا
 پیش‌نیاز:
 
