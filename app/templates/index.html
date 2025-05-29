@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+<head>
+  <title>Seat Reservation Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body { font-family: sans-serif; margin: 30px; background: #f9f9f9; }
+    canvas { background: white; padding: 10px; border-radius: 10px; }
+    .dashboard-container { display: flex; gap: 40px; align-items: flex-start; margin-bottom: 30px; }
+    .chart-box, .seat-map-box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+    .seat-map-box { display: grid; grid-template-columns: repeat(10, 30px); gap: 5px; }
+    .seat { width: 30px; height: 30px; border: 1px solid #ccc; border-radius: 5px; }
+    table { margin-top: 30px; width: 100%; background: white; border-collapse: collapse; }
+    th, td { border: 1px solid #ddd; padding: 6px; text-align: center; }
+    th { background: #444; color: white; }
+    .success { color: green; }
+    .failed { color: red; }
+    .cancelled { color: blue; }
+  </style>
+</head>
+<body>
+  <h2>🎯 Run Priority-Based Reservation</h2>
+  <form method="post" action="/">
+    <label>Number of Customers (Threads):</label>
+    <input type="number" name="num_threads" min="1" max="{{ max_threads }}" required>
+    <button type="submit">Start Simulation</button>
+  </form>
+
+  <h1>📊 Seat Reservation Dashboard</h1>
+
+  <div class="dashboard-container">
+    <div class="chart-box">
+      <h3>Status Distribution (Pie)</h3>
+      <canvas id="pieChart" width="300" height="300"></canvas>
+    </div>
+    <div class="seat-map-box">
+      {% for seat in seat_status %}
+        <div class="seat" style="background: {{ 'red' if seat else 'white' }}"></div>
+      {% endfor %}
+    </div>
+  </div>
+
+  <h2>📋 Reservation Log</h2>
+  <table>
+    <tr>
+      <th>Thread</th>
+      <th>Requested</th>
+      <th>Status</th>
+      <th>Time</th>
+    </tr>
+    {% for entry in logs %}
+    <tr>
+      <td>{{ entry.thread }}</td>
+      <td>{{ entry.requested }}</td>
+      <td class="{{ entry.status|lower }}">{{ entry.status }}</td>
+      <td>{{ entry.timestamp }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+
+  <script>
+    const statusLabels = {{ status_labels|tojson }};
+    const statusValues = {{ status_values|tojson }};
+    const statusColors = statusLabels.map(label => {
+      if (label === "SUCCESS") return "green";
+      if (label === "FAILED") return "red";
+      if (label === "CANCELLED") return "blue";
+      return "gray";
+    });
+
+    new Chart(document.getElementById('pieChart'), {
+      type: 'pie',
+      data: {
+        labels: statusLabels,
+        datasets: [{
+          label: 'Status Count',
+          data: statusValues,
+          backgroundColor: statusColors
+        }]
+      }
+    });
+  </script>
+</body>
+</html>
