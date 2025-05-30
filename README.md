@@ -70,7 +70,7 @@
 
 ### ۱. کلون کردن پروژه
 
-```bash
+```
 git clone https://github.com/YOUR_USERNAME/seat-reservation-system.git
 cd seat-reservation-system
 ```
@@ -131,7 +131,7 @@ Pytest	تست‌های خودکار
 
 آپدیت زنده داشبورد با WebSocket
 
-RESTful API برای رزرو خودکار از بیرون
+برای رزرو خودکار از بیرون RESTful API
 
 احراز هویت و چندکاربره‌سازی
 
