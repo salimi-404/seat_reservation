@@ -142,12 +142,8 @@ RESTful API برای رزرو خودکار از بیرون
 ارسال ایمیل یا نوتیفیکیشن پس از رزرو موفق
 
 👨‍💻 توسعه‌دهنده
-
-این پروژه توسط سلیم توسعه داده شده است.
-
-    گیت‌هاب: github.com/salimi-404
-    ایمیل: mamad.h.salimi@gmail.com
-
+Git Hub : https://github.com/salimi-404
+Email : mamad.h.salimi@gmail.com
 📝 مجوز (License)
 
 این پروژه تحت مجوز MIT منتشر شده است.
